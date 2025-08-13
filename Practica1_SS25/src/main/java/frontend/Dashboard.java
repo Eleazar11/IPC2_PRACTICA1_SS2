@@ -4,6 +4,7 @@
  */
 package frontend;
 
+import backend.ConexionDB;
 import java.awt.BorderLayout;
 
 /**
@@ -16,6 +17,7 @@ public class Dashboard extends javax.swing.JFrame {
      * Creates new form Dashboard
      */
     public Dashboard() {
+        ConexionDB.getConnection();
         initComponents();
         Home Home = new Home();
         Home.setSize(600, 300);
