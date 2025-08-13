@@ -17,13 +17,15 @@ public class Dashboard extends javax.swing.JFrame {
      */
     public Dashboard() {
         initComponents();
-        Home pagina1 = new Home();
-        pagina1.setSize(700, 460);
-        pagina1.setLocation(0,0);
+        Home Home = new Home();
+        Home.setSize(600, 300);
+        Home.setLocation(0,0);
         content.removeAll();
-        content.add(pagina1, BorderLayout.CENTER);
+        content.add(Home, BorderLayout.CENTER);
         content.revalidate();
         content.repaint();
+        this.setLocationRelativeTo(null);
+        this.setTitle("Practica 1");
         this.setResizable(false);
     }
 
@@ -134,12 +136,8 @@ public class Dashboard extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-<<<<<<< Updated upstream
-                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-=======
                 .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
->>>>>>> Stashed changes
             .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -148,7 +146,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         EventosRegistro EventosRegistro = new EventosRegistro();
-        EventosRegistro.setSize(700, 460);
+        EventosRegistro.setSize(600, 300);
         EventosRegistro.setLocation(0,0);
         content.removeAll();
         content.add(EventosRegistro, BorderLayout.CENTER);
@@ -158,12 +156,11 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         ParticipantesRegistro ParticipantesRegistro = new ParticipantesRegistro();
-        ParticipantesRegistro.setSize(700, 460);
+        ParticipantesRegistro.setSize(600, 300);
         ParticipantesRegistro.setLocation(0,0);
         content.removeAll();
         content.add(ParticipantesRegistro, BorderLayout.CENTER);
         content.revalidate();
-        content.repaint();
         content.repaint();
     }//GEN-LAST:event_jButton2ActionPerformed
 

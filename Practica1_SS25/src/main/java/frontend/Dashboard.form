@@ -68,10 +68,7 @@
               <Component id="jButton9" min="-2" pref="40" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jButton10" min="-2" pref="40" max="-2" attributes="0"/>
-<<<<<<< Updated upstream
-=======
               <EmptySpace max="32767" attributes="0"/>
->>>>>>> Stashed changes
           </Group>
           <Component id="content" alignment="0" max="32767" attributes="0"/>
       </Group>
