@@ -4,6 +4,13 @@
  */
 package frontend;
 
+import backend.ConexionDB;
+import backend.Eventos;
+import backend.InsertarEvento;
+import backend.TipoEvento;
+import java.time.LocalDate;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author eleaz
@@ -45,7 +52,7 @@ public class EventosRegistro extends javax.swing.JPanel {
 
         jLabel1.setText("REGISTRO DE EVENTOS");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CHARLA", "CONGRESO", "TALLER", "DEBATE" }));
         jComboBox3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox3ActionPerformed(evt);
@@ -69,6 +76,11 @@ public class EventosRegistro extends javax.swing.JPanel {
         jLabel7.setText("Cupo Máximo: ");
 
         jButton1.setText("REGISTRAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("REGRESAR AL HOME");
 
@@ -160,12 +172,89 @@ public class EventosRegistro extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox3ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            // Extraer valores
+            String codigoEvento = jTextField1.getText().trim();
+            String tituloEvento = jTextField2.getText().trim();
+            String ubicacion = jTextArea1.getText().trim();
+            String cupoStr = jTextField3.getText().trim();
+
+            // Validar campos vacíos
+            if (codigoEvento.isEmpty() || tituloEvento.isEmpty() || ubicacion.isEmpty() || cupoStr.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.");
+                return;
+            }
+
+            // Validar fecha
+            java.util.Date fechaUtil = jDateChooser1.getDate();
+            if (fechaUtil == null) {
+                JOptionPane.showMessageDialog(this, "Debe seleccionar una fecha para el evento.");
+                return;
+            }
+            java.sql.Date fechaSql = new java.sql.Date(fechaUtil.getTime());
+            LocalDate fechaEvento = fechaSql.toLocalDate();
+
+            // Validar tipo de evento
+            String tipoSeleccionado = (String) jComboBox3.getSelectedItem();
+            TipoEvento tipoEvento = TipoEvento.valueOf(tipoSeleccionado.toUpperCase());
+
+            // Validar ubicación
+            if (ubicacion.length() > 150) {
+                JOptionPane.showMessageDialog(this, "La ubicación no puede superar los 150 caracteres.");
+                jTextArea1.setText("");
+                return;
+            }
+
+            // Validar cupo
+            int cupoMaximo;
+            try {
+                cupoMaximo = Integer.parseInt(cupoStr);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Error: El cupo máximo debe ser un número válido.");
+                return;
+            }
+
+            // Conexión e inserción
+            InsertarEvento insertar = new InsertarEvento(ConexionDB.getConnection());
+
+            // Validar código único
+            if (insertar.existeCodigoEvento(codigoEvento)) {
+                JOptionPane.showMessageDialog(this, "El código de evento ya existe. Ingrese uno diferente.");
+                jTextField1.setText("");
+                return;
+            }
+
+            // Crear y guardar evento
+            Eventos nuevoEvento = new Eventos(
+                    codigoEvento,
+                    fechaEvento,
+                    tipoEvento,
+                    ubicacion,
+                    tituloEvento,
+                    cupoMaximo
+            );
+            insertar.ingresarEvento(nuevoEvento);
+
+            JOptionPane.showMessageDialog(this, "Evento registrado exitosamente.");
+
+            jTextArea1.setText("");
+            jTextField1.setText("");
+            jTextField2.setText("");
+            jTextField3.setText("");
+            jDateChooser1.setDate(null);
+            jComboBox3.setSelectedIndex(0);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al registrar el evento: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
