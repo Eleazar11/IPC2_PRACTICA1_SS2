@@ -20,7 +20,7 @@ public class Dashboard extends javax.swing.JFrame {
         ConexionDB.getConnection();
         initComponents();
         Home Home = new Home();
-        Home.setSize(600, 300);
+        Home.setSize(700, 460);
         Home.setLocation(0,0);
         content.removeAll();
         content.add(Home, BorderLayout.CENTER);
@@ -54,35 +54,35 @@ public class Dashboard extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("jButton1");
+        jButton1.setText("EVENTOS");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("jButton2");
+        jButton2.setText("PARTICIPANTES");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        jButton3.setText("jButton3");
+        jButton3.setText("INSCRIPCIÓN");
 
-        jButton4.setText("jButton4");
+        jButton4.setText("PAGO");
 
-        jButton5.setText("jButton5");
+        jButton5.setText("ACTIVIDADES");
 
-        jButton6.setText("jButton6");
+        jButton6.setText("ASISTENCIA");
 
-        jButton7.setText("jButton7");
+        jButton7.setText("CERTIFICADO");
 
-        jButton8.setText("jButton8");
+        jButton8.setText("R.PARTICIPANTES");
 
-        jButton9.setText("jButton9");
+        jButton9.setText("R.ACTIVIDADES");
 
-        jButton10.setText("jButton10");
+        jButton10.setText("R.EVENTOS");
 
         javax.swing.GroupLayout contentLayout = new javax.swing.GroupLayout(content);
         content.setLayout(contentLayout);
@@ -105,13 +105,13 @@ public class Dashboard extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))
+                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE))
                         .addGap(3, 3, 3))
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -148,7 +148,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         EventosRegistro EventosRegistro = new EventosRegistro();
-        EventosRegistro.setSize(600, 300);
+        EventosRegistro.setSize(700, 460);
         EventosRegistro.setLocation(0,0);
         content.removeAll();
         content.add(EventosRegistro, BorderLayout.CENTER);
@@ -158,7 +158,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         ParticipantesRegistro ParticipantesRegistro = new ParticipantesRegistro();
-        ParticipantesRegistro.setSize(600, 300);
+        ParticipantesRegistro.setSize(700, 460);
         ParticipantesRegistro.setLocation(0,0);
         content.removeAll();
         content.add(ParticipantesRegistro, BorderLayout.CENTER);

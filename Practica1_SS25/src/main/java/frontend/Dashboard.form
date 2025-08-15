@@ -29,15 +29,15 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="jButton1" max="32767" attributes="0"/>
-                          <Component id="jButton3" pref="130" max="32767" attributes="0"/>
-                          <Component id="jButton2" pref="130" max="32767" attributes="0"/>
+                          <Component id="jButton3" max="32767" attributes="0"/>
+                          <Component id="jButton2" pref="133" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="jButton5" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
                   <Component id="jButton9" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
                   <Component id="jButton10" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
                   <Component id="jButton4" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
-                  <Component id="jButton5" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
                   <Component id="jButton6" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
                   <Component id="jButton7" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
                   <Component id="jButton8" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
@@ -77,7 +77,7 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jButton1"/>
+        <Property name="text" type="java.lang.String" value="EVENTOS"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
@@ -85,7 +85,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButton2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jButton2"/>
+        <Property name="text" type="java.lang.String" value="PARTICIPANTES"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
@@ -93,42 +93,42 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButton3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jButton3"/>
+        <Property name="text" type="java.lang.String" value="INSCRIPCI&#xd3;N"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jButton4"/>
+        <Property name="text" type="java.lang.String" value="PAGO"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton5">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jButton5"/>
+        <Property name="text" type="java.lang.String" value="ACTIVIDADES"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton6">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jButton6"/>
+        <Property name="text" type="java.lang.String" value="ASISTENCIA"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton7">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jButton7"/>
+        <Property name="text" type="java.lang.String" value="CERTIFICADO"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton8">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jButton8"/>
+        <Property name="text" type="java.lang.String" value="R.PARTICIPANTES"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton9">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jButton9"/>
+        <Property name="text" type="java.lang.String" value="R.ACTIVIDADES"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton10">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jButton10"/>
+        <Property name="text" type="java.lang.String" value="R.EVENTOS"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="content">
