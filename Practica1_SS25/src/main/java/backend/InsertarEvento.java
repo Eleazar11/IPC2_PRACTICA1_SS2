@@ -23,8 +23,8 @@ public class InsertarEvento {
     }
 
     public void ingresarEvento(Eventos evento) {
-        String sql = "INSERT INTO evento (codigo_evento, fecha_evento, tipo_evento, titulo, ubicacion, cupo_maximo) "
-                + "VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO evento (codigo_evento, fecha_evento, tipo_evento, titulo, ubicacion, cupo_maximo, precio_evento) "
+                   + "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, evento.getCodigoEvento());
@@ -32,10 +32,11 @@ public class InsertarEvento {
             // convertir LocalDate a java.sql.Date
             pstmt.setDate(2, java.sql.Date.valueOf(evento.getFechaEvento()));
 
-            pstmt.setString(3, evento.getTipoEvento().name()); // el enum se guarda como texto
+            pstmt.setString(3, evento.getTipoEvento().name()); // enum guardado como texto
             pstmt.setString(4, evento.getTituloEvento());
             pstmt.setString(5, evento.getUbicacion());
             pstmt.setInt(6, evento.getCupoMaximo());
+            pstmt.setDouble(7, evento.getPrecioEvento()); 
 
             int rowsAffected = pstmt.executeUpdate();
             if (rowsAffected > 0) {
@@ -61,5 +62,4 @@ public class InsertarEvento {
         }
         return false;
     }
-
 }

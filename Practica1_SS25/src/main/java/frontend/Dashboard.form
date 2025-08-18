@@ -40,8 +40,8 @@
                   <Component id="jButton8" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                       <Component id="jButton5" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jButton4" alignment="0" max="32767" attributes="0"/>
                       <Component id="jButton6" alignment="0" pref="130" max="32767" attributes="0"/>
+                      <Component id="jButton4" alignment="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <Component id="content" min="-2" max="-2" attributes="0"/>
@@ -104,6 +104,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="PAGO"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton5">
       <Properties>

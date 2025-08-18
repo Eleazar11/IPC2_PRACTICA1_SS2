@@ -50,6 +50,8 @@ public class EventosRegistro extends javax.swing.JPanel {
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField4 = new javax.swing.JTextField();
 
         jLabel1.setText("REGISTRO DE EVENTOS");
 
@@ -90,6 +92,8 @@ public class EventosRegistro extends javax.swing.JPanel {
             }
         });
 
+        jLabel2.setText("Costo del evento: ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -115,11 +119,13 @@ public class EventosRegistro extends javax.swing.JPanel {
                                             .addComponent(jDateChooser1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(74, 74, 74)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
                                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6)))
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jTextField4)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(276, 276, 276)
                                 .addComponent(jLabel1)))
@@ -168,6 +174,10 @@ public class EventosRegistro extends javax.swing.JPanel {
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)
                         .addGap(68, 68, 68))))
@@ -185,9 +195,10 @@ public class EventosRegistro extends javax.swing.JPanel {
             String tituloEvento = jTextField2.getText().trim();
             String ubicacion = jTextArea1.getText().trim();
             String cupoStr = jTextField3.getText().trim();
+            String precioStr = jTextField4.getText().trim(); // nuevo campo
 
             // Validar campos vacíos
-            if (codigoEvento.isEmpty() || tituloEvento.isEmpty() || ubicacion.isEmpty() || cupoStr.isEmpty()) {
+            if (codigoEvento.isEmpty() || tituloEvento.isEmpty() || ubicacion.isEmpty() || cupoStr.isEmpty() || precioStr.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.");
                 return;
             }
@@ -221,6 +232,19 @@ public class EventosRegistro extends javax.swing.JPanel {
                 return;
             }
 
+            // Validar precio
+            double precioEvento;
+            try {
+                precioEvento = Double.parseDouble(precioStr);
+                if (precioEvento < 0) {
+                    JOptionPane.showMessageDialog(this, "El precio del evento no puede ser negativo.");
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Error: El precio del evento debe ser un número válido.");
+                return;
+            }
+
             // Conexión e inserción
             InsertarEvento insertar = new InsertarEvento(ConexionDB.getConnection());
 
@@ -238,16 +262,19 @@ public class EventosRegistro extends javax.swing.JPanel {
                     tipoEvento,
                     ubicacion,
                     tituloEvento,
-                    cupoMaximo
+                    cupoMaximo,
+                    precioEvento
             );
             insertar.ingresarEvento(nuevoEvento);
 
             JOptionPane.showMessageDialog(this, "Evento registrado exitosamente.");
 
+            // Limpiar campos
             jTextArea1.setText("");
             jTextField1.setText("");
             jTextField2.setText("");
             jTextField3.setText("");
+            jTextField4.setText(""); // limpiar precio también
             jDateChooser1.setDate(null);
             jComboBox3.setSelectedIndex(0);
 
@@ -260,7 +287,7 @@ public class EventosRegistro extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Home Home = new Home();
         Home.setSize(700, 460);
-        Home.setLocation(0,0);
+        Home.setLocation(0, 0);
         this.removeAll();
         this.add(Home, BorderLayout.CENTER);
         this.revalidate();
@@ -274,6 +301,7 @@ public class EventosRegistro extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> jComboBox3;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -285,5 +313,6 @@ public class EventosRegistro extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
 }
