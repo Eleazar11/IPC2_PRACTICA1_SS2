@@ -4,6 +4,13 @@
  */
 package frontend;
 
+import backend.ConexionDB;
+import backend.InsertarParticipante;
+import backend.Participante;
+import backend.TipoParticipante;
+import java.awt.BorderLayout;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author eleaz
@@ -45,7 +52,7 @@ public class ParticipantesRegistro extends javax.swing.JPanel {
 
         jLabel3.setText("Nombre Completo:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ASISTENTE", "CONFERENCISTA", "TALLERISTA", "OTRO" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ESTUDIANTE", "PROFESIONAL", "INVITADO" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -61,8 +68,18 @@ public class ParticipantesRegistro extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTextArea1);
 
         jButton1.setText("REGISTRAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("REGRESAR AL HOME");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -131,6 +148,88 @@ public class ParticipantesRegistro extends javax.swing.JPanel {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Home Home = new Home();
+        Home.setSize(700, 460);
+        Home.setLocation(0, 0);
+        this.removeAll();
+        this.add(Home, BorderLayout.CENTER);
+        this.revalidate();
+        this.repaint();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            // Extraer valores
+            String nombre = jTextField1.getText().trim();
+            String correo = jTextField2.getText().trim();
+            String institucion = jTextArea1.getText().trim();
+            String tipoSeleccionado = (String) jComboBox1.getSelectedItem();
+
+            // Validar campos vacíos
+            if (nombre.isEmpty() || correo.isEmpty() || institucion.isEmpty() || tipoSeleccionado == null) {
+                JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.");
+                return;
+            }
+
+            // Validar longitud de institución
+            if (institucion.length() > 150) {
+                JOptionPane.showMessageDialog(this, "La institución no puede superar los 150 caracteres.");
+                jTextArea1.setText("");
+                return;
+            }
+
+            // Validar correo (formato simple con regex)
+            if (!correo.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+                JOptionPane.showMessageDialog(this, "Ingrese un correo electrónico válido.");
+                jTextField2.setText("");
+                return;
+            }
+
+            // Validar tipo de participante (Enum)
+            TipoParticipante tipoParticipante;
+            try {
+                tipoParticipante = TipoParticipante.valueOf(tipoSeleccionado.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                JOptionPane.showMessageDialog(this, "Seleccione un tipo de participante válido.");
+                return;
+            }
+
+            // Conexión e inserción
+            InsertarParticipante insertar = new InsertarParticipante(ConexionDB.getConnection());
+
+            // Validar correo único
+            if (insertar.existeCorreo(correo)) {
+                JOptionPane.showMessageDialog(this, "El correo ya está registrado. Ingrese otro diferente.");
+                jTextField2.setText("");
+                return;
+            }
+
+            // Crear objeto participante
+            Participante nuevoParticipante = new Participante(
+                    nombre,
+                    correo,
+                    tipoParticipante,
+                    institucion
+            );
+
+            // Guardar en la base de datos
+            insertar.ingresarParticipante(nuevoParticipante);
+
+            JOptionPane.showMessageDialog(this, "Participante registrado exitosamente.");
+
+            // Limpiar campos
+            jTextField1.setText("");
+            jTextField2.setText("");
+            jTextArea1.setText("");
+            jComboBox1.setSelectedIndex(0);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al registrar el participante: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
