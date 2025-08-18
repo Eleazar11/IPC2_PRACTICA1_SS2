@@ -8,6 +8,7 @@ import backend.ConexionDB;
 import backend.Eventos;
 import backend.InsertarEvento;
 import backend.TipoEvento;
+import java.awt.BorderLayout;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
 
@@ -83,6 +84,11 @@ public class EventosRegistro extends javax.swing.JPanel {
         });
 
         jButton2.setText("REGRESAR AL HOME");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -250,6 +256,16 @@ public class EventosRegistro extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Home Home = new Home();
+        Home.setSize(700, 460);
+        Home.setLocation(0,0);
+        this.removeAll();
+        this.add(Home, BorderLayout.CENTER);
+        this.revalidate();
+        this.repaint();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
