@@ -1,0 +1,90 @@
+-- Crear base de datos
+CREATE DATABASE IF NOT EXISTS `HyruleEvents`;
+USE `HyruleEvents`;
+
+-- Tabla: Evento
+CREATE TABLE Evento (
+    id_evento INT AUTO_INCREMENT PRIMARY KEY,
+    codigo_evento VARCHAR(20) NOT NULL UNIQUE,
+    fecha_evento DATE NOT NULL,
+    tipo_evento ENUM('CHARLA', 'CONGRESO', 'TALLER', 'DEBATE') NOT NULL,
+    titulo VARCHAR(200) NOT NULL,
+    ubicacion VARCHAR(150) NOT NULL,
+    cupo_maximo INT NOT NULL CHECK (cupo_maximo > 0),
+    precio_evento DECIMAL(10,2) NOT NULL
+);
+
+-- Tabla: Participante
+CREATE TABLE Participante (
+    id_participante INT AUTO_INCREMENT PRIMARY KEY,
+    correo VARCHAR(100) NOT NULL UNIQUE,
+    nombre_completo VARCHAR(45) NOT NULL,
+    tipo_participante ENUM('ESTUDIANTE', 'PROFESIONAL', 'INVITADO') NOT NULL,
+    institucion VARCHAR(150) NOT NULL,
+    participante_validado BOOLEAN DEFAULT FALSE
+);
+
+-- Tabla: Inscripcion
+CREATE TABLE Inscripcion (
+    id_inscripcion INT AUTO_INCREMENT PRIMARY KEY,
+    correo_participante VARCHAR(100) NOT NULL,
+    codigo_evento VARCHAR(20) NOT NULL,
+    tipo_inscripcion ENUM('ASISTENTE', 'CONFERENCISTA', 'TALLERISTA', 'OTRO') NOT NULL,
+    inscripcion_validada BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (correo_participante) REFERENCES Participante(correo)
+        ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (codigo_evento) REFERENCES Evento(codigo_evento)
+        ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+-- Tabla: Pago
+CREATE TABLE Pago (
+    id_pago INT AUTO_INCREMENT PRIMARY KEY,
+    correo_participante VARCHAR(100) NOT NULL,
+    codigo_evento VARCHAR(20) NOT NULL,
+    metodo_pago ENUM('EFECTIVO', 'TARJETA', 'TRANSFERENCIA') NOT NULL,
+    monto DECIMAL(10,2) NOT NULL CHECK (monto >= 0),
+    FOREIGN KEY (correo_participante) REFERENCES Participante(correo)
+        ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (codigo_evento) REFERENCES Evento(codigo_evento)
+        ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+-- Tabla: Actividad
+CREATE TABLE Actividad (
+    codigo_actividad VARCHAR(20) PRIMARY KEY,
+    codigo_evento VARCHAR(20) NOT NULL,
+    tipo_actividad ENUM('CHARLA', 'TALLER', 'DEBATE', 'OTRA') NOT NULL,
+    titulo VARCHAR(200) NOT NULL,
+    correo_encargado VARCHAR(100) NOT NULL,
+    hora_inicio TIME NOT NULL,
+    hora_fin TIME NOT NULL,
+    cupo_maximo INT NOT NULL CHECK (cupo_maximo > 0),
+    FOREIGN KEY (codigo_evento) REFERENCES Evento(codigo_evento)
+        ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (correo_encargado) REFERENCES Participante(correo)
+        ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+-- Tabla: Asistencia
+CREATE TABLE Asistencia (
+    id_asistencia INT AUTO_INCREMENT PRIMARY KEY,
+    codigo_actividad VARCHAR(20) NOT NULL,
+    correo_participante VARCHAR(100) NOT NULL,
+    FOREIGN KEY (codigo_actividad) REFERENCES Actividad(codigo_actividad)
+        ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (correo_participante) REFERENCES Participante(correo)
+        ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+-- Tabla: Certificado
+CREATE TABLE Certificado (
+    id_certificado INT AUTO_INCREMENT PRIMARY KEY,
+    correo_participante VARCHAR(100) NOT NULL,
+    codigo_evento VARCHAR(20) NOT NULL,
+    fecha_emision DATE NOT NULL,
+    FOREIGN KEY (correo_participante) REFERENCES Participante(correo)
+        ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (codigo_evento) REFERENCES Evento(codigo_evento)
+        ON UPDATE CASCADE ON DELETE CASCADE
+);

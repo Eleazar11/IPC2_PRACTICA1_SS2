@@ -17,15 +17,18 @@ public class Eventos {
     private String ubicacion;  // <= 150 caracteres
     private String tituloEvento;
     private int cupoMaximo;
+    private double precioEvento;
 
-    public Eventos(String codigoEvento, LocalDate fechaEvento, TipoEvento tipoEvento, String ubicacion, String tituloEvento, int cupoMaximo) {
+    public Eventos(String codigoEvento, LocalDate fechaEvento, TipoEvento tipoEvento, String ubicacion, String tituloEvento, int cupoMaximo, double precioEvento) {
         this.codigoEvento = codigoEvento;
         this.fechaEvento = fechaEvento;
         this.tipoEvento = tipoEvento;
         this.ubicacion = ubicacion;
         this.tituloEvento = tituloEvento;
         this.cupoMaximo = cupoMaximo;
+        this.precioEvento = precioEvento;
     }
+    
 
     public String getCodigoEvento() {
         return codigoEvento;
@@ -75,6 +78,13 @@ public class Eventos {
         this.cupoMaximo = cupoMaximo;
     }
     
+    public double getPrecioEvento() {
+        return precioEvento;
+    }
+
+    public void setPrecioEvento(double precioEvento) {
+        this.precioEvento = precioEvento;
+    }
     
     
 }
