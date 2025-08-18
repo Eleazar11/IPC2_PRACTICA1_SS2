@@ -208,10 +208,10 @@ public class ParticipantesRegistro extends javax.swing.JPanel {
 
             // Crear objeto participante
             Participante nuevoParticipante = new Participante(
-                    nombre,
-                    correo,
-                    tipoParticipante,
-                    institucion
+                nombre,
+                correo,
+                tipoParticipante,
+                institucion
             );
 
             // Guardar en la base de datos
