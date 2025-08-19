@@ -245,6 +245,12 @@ public class ActividadRegistro extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "La hora de fin debe ser mayor que la hora de inicio.");
                 return;
             }
+            
+            // Validamos que las horas esten bien
+            if (horaInicio.compareTo(horaFin) >= 0) {
+                JOptionPane.showMessageDialog(null, "La hora de inicio debe ser menor que la hora de fin.");
+                return;
+            }
 
             // Validar cupo
             int cupoMaximo;

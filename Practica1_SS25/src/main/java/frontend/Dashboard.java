@@ -90,6 +90,11 @@ public class Dashboard extends javax.swing.JFrame {
         });
 
         jButton6.setText("ASISTENCIA");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setText("CERTIFICADO");
 
@@ -210,6 +215,16 @@ public class Dashboard extends javax.swing.JFrame {
         content.revalidate();
         content.repaint();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        AsistenciaRegistro AsistenciaRegistro = new AsistenciaRegistro();
+        AsistenciaRegistro.setSize(700, 460);
+        AsistenciaRegistro.setLocation(0,0);
+        content.removeAll();
+        content.add(AsistenciaRegistro, BorderLayout.CENTER);
+        content.revalidate();
+        content.repaint();
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
