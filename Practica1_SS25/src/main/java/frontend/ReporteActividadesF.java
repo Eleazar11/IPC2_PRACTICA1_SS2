@@ -39,7 +39,7 @@ public class ReporteActividadesF extends javax.swing.JPanel {
 
         jLabel3.setText("Igrese el codigo del evento ");
 
-        jLabel1.setText("REPORTE PARTICIPANTES");
+        jLabel1.setText("REPORTE ACTIVIDADES");
 
         jButton2.setText("REGRESAR AL HOME");
         jButton2.addActionListener(new java.awt.event.ActionListener() {

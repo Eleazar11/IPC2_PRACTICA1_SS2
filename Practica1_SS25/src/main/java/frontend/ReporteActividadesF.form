@@ -80,7 +80,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="REPORTE PARTICIPANTES"/>
+        <Property name="text" type="java.lang.String" value="REPORTE ACTIVIDADES"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton2">
