@@ -104,6 +104,11 @@ public class Dashboard extends javax.swing.JFrame {
         });
 
         jButton8.setText("R.PARTICIPANTES");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         jButton9.setText("R.ACTIVIDADES");
 
@@ -240,6 +245,16 @@ public class Dashboard extends javax.swing.JFrame {
         content.revalidate();
         content.repaint();
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        ReporteParticipantesF ReporteParticipantes = new ReporteParticipantesF();
+        ReporteParticipantes.setSize(700, 460);
+        ReporteParticipantes.setLocation(0,0);
+        content.removeAll();
+        content.add(ReporteParticipantes, BorderLayout.CENTER);
+        content.revalidate();
+        content.repaint();
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
      * @param args the command line arguments
