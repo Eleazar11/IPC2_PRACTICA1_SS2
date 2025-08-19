@@ -97,6 +97,11 @@ public class Dashboard extends javax.swing.JFrame {
         });
 
         jButton7.setText("CERTIFICADO");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton8.setText("R.PARTICIPANTES");
 
@@ -225,6 +230,16 @@ public class Dashboard extends javax.swing.JFrame {
         content.revalidate();
         content.repaint();
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        GenerarCertificado GenerarCertificado = new GenerarCertificado();
+        GenerarCertificado.setSize(700, 460);
+        GenerarCertificado.setLocation(0,0);
+        content.removeAll();
+        content.add(GenerarCertificado, BorderLayout.CENTER);
+        content.revalidate();
+        content.repaint();
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
