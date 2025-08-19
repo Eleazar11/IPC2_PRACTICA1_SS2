@@ -190,20 +190,20 @@ public class EventosRegistro extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            // Extraer valores
+            // Extraemos valores
             String codigoEvento = jTextField1.getText().trim();
             String tituloEvento = jTextField2.getText().trim();
             String ubicacion = jTextArea1.getText().trim();
             String cupoStr = jTextField3.getText().trim();
             String precioStr = jTextField4.getText().trim(); // nuevo campo
 
-            // Validar campos vacíos
+            // Validamos campos vacíos
             if (codigoEvento.isEmpty() || tituloEvento.isEmpty() || ubicacion.isEmpty() || cupoStr.isEmpty() || precioStr.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.");
                 return;
             }
 
-            // Validar fecha
+            // Validamos fecha
             java.util.Date fechaUtil = jDateChooser1.getDate();
             if (fechaUtil == null) {
                 JOptionPane.showMessageDialog(this, "Debe seleccionar una fecha para el evento.");
@@ -212,18 +212,18 @@ public class EventosRegistro extends javax.swing.JPanel {
             java.sql.Date fechaSql = new java.sql.Date(fechaUtil.getTime());
             LocalDate fechaEvento = fechaSql.toLocalDate();
 
-            // Validar tipo de evento
+            // Validamos tipo de evento
             String tipoSeleccionado = (String) jComboBox3.getSelectedItem();
             TipoEvento tipoEvento = TipoEvento.valueOf(tipoSeleccionado.toUpperCase());
 
-            // Validar ubicación
+            // Validamos ubicación
             if (ubicacion.length() > 150) {
                 JOptionPane.showMessageDialog(this, "La ubicación no puede superar los 150 caracteres.");
                 jTextArea1.setText("");
                 return;
             }
 
-            // Validar cupo
+            // Validamos cupo
             int cupoMaximo;
             try {
                 cupoMaximo = Integer.parseInt(cupoStr);
@@ -232,7 +232,7 @@ public class EventosRegistro extends javax.swing.JPanel {
                 return;
             }
 
-            // Validar precio
+            // Validamos precio
             double precioEvento;
             try {
                 precioEvento = Double.parseDouble(precioStr);
@@ -245,17 +245,17 @@ public class EventosRegistro extends javax.swing.JPanel {
                 return;
             }
 
-            // Conexión e inserción
+            // aca funca la conexión e inserción
             InsertarEvento insertar = new InsertarEvento(ConexionDB.getConnection());
 
-            // Validar código único
+            // Validamos código único
             if (insertar.existeCodigoEvento(codigoEvento)) {
                 JOptionPane.showMessageDialog(this, "El código de evento ya existe. Ingrese uno diferente.");
                 jTextField1.setText("");
                 return;
             }
 
-            // Crear y guardar evento
+            // Creamos y guardar evento
             Eventos nuevoEvento = new Eventos(
                     codigoEvento,
                     fechaEvento,
@@ -269,12 +269,12 @@ public class EventosRegistro extends javax.swing.JPanel {
 
             JOptionPane.showMessageDialog(this, "Evento registrado exitosamente.");
 
-            // Limpiar campos
+            // Limpiamos campos
             jTextArea1.setText("");
             jTextField1.setText("");
             jTextField2.setText("");
             jTextField3.setText("");
-            jTextField4.setText(""); // limpiar precio también
+            jTextField4.setText(""); 
             jDateChooser1.setDate(null);
             jComboBox3.setSelectedIndex(0);
 

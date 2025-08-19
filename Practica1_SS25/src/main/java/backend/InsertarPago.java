@@ -22,12 +22,12 @@ public class InsertarPago {
     }
 
     public void ingresarPago(Pago pago) throws Exception {
-        // 1. Validar que exista la inscripción
+        // Validamos que exista la inscripción
         if (!existeInscripcion(pago.getCorreoParticipante(), pago.getCodigoEvento())) {
             throw new Exception("No existe una inscripción para este participante en el evento indicado.");
         }
 
-        // 2. Validar que el monto sea >= precio_evento
+        // Validamos que el monto sea >= precio_evento
         double precioEvento = obtenerPrecioEvento(pago.getCodigoEvento());
         if (precioEvento < 0) {
             throw new Exception("No se encontró el evento asociado al código.");
@@ -37,12 +37,12 @@ public class InsertarPago {
             throw new Exception("El monto ingresado no puede ser menor al precio del evento. Precio: " + precioEvento);
         }
 
-        // 3. Validar que no exista ya un pago
+        // Validamos que no exista ya un pago
         if (existePago(pago.getCorreoParticipante(), pago.getCodigoEvento())) {
             throw new Exception("Ya existe un pago registrado para este participante en este evento.");
         }
 
-        // 4. Insertar el pago
+        // Insertamos el pago
         String sql = "INSERT INTO pago (correo_participante, codigo_evento, metodo_pago, monto) VALUES (?, ?, ?, ?)";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, pago.getCorreoParticipante());
@@ -54,10 +54,10 @@ public class InsertarPago {
             if (rowsAffected > 0) {
                 System.out.println("Pago registrado exitosamente.");
 
-                // Actualizar participante_validado
+                // Aca actulizamos al participante_validado en la db :b
                 actualizarParticipante(pago.getCorreoParticipante());
 
-                // Actualizar inscripcion_validada
+                // Actualizamos inscripcion_validada :)
                 actualizarInscripcion(pago.getCorreoParticipante(), pago.getCodigoEvento());
             }
         } catch (SQLException e) {
@@ -67,7 +67,7 @@ public class InsertarPago {
         }
     }
 
-    // Validar existencia de inscripción
+    // Validamos existencia de inscripción
     private boolean existeInscripcion(String correoParticipante, String codigoEvento) {
         String sql = "SELECT COUNT(*) FROM inscripcion WHERE correo_participante = ? AND codigo_evento = ?";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -84,7 +84,7 @@ public class InsertarPago {
         return false;
     }
 
-    // Obtener precio del evento
+    // Obtenemos el precio del evento
     private double obtenerPrecioEvento(String codigoEvento) {
         String sql = "SELECT precio_evento FROM evento WHERE codigo_evento = ?";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -100,7 +100,7 @@ public class InsertarPago {
         return -1; // Indica que no se encontró
     }
 
-    // Validar existencia de pago
+    // Validamos la existencia de pago
     private boolean existePago(String correoParticipante, String codigoEvento) {
         String sql = "SELECT COUNT(*) FROM pago WHERE correo_participante = ? AND codigo_evento = ?";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -117,7 +117,7 @@ public class InsertarPago {
         return false;
     }
 
-    // Marcar al participante como validado
+    // Marcamos al participante como validado
     private void actualizarParticipante(String correo) {
         String sql = "UPDATE participante SET participante_validado = 1 WHERE correo = ?";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -129,7 +129,7 @@ public class InsertarPago {
         }
     }
 
-// Marcar la inscripción como validada
+// Ponemos la inscripción como validada
     private void actualizarInscripcion(String correo, String codigoEvento) {
         String sql = "UPDATE inscripcion SET inscripcion_validada = 1 WHERE correo_participante = ? AND codigo_evento = ?";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {

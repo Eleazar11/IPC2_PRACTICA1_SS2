@@ -18,13 +18,13 @@ public class ConexionDB {
     private static final String USER = "root";
     private static final String PASSWORD = "Eleazar123Colop";
 
-    // Solo una instancia de la conexión
+    // Solo hacemos una instancia de la conexión
     private static Connection connection;
 
     // Constructor privado para que no se pueda instanciar
     private ConexionDB() { }
 
-    // Obtener la conexión
+    // Obtenemos la conexión
     public static Connection getConnection() {
         try {
             if (connection == null || connection.isClosed()) {
@@ -42,7 +42,7 @@ public class ConexionDB {
         return connection;
     }
 
-    // Cerrar conexión
+    // Cerramo conexión
     public static void cerrarConexion() {
         try {
             if (connection != null && !connection.isClosed()) {

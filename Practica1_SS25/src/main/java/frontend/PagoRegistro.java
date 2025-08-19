@@ -150,26 +150,26 @@ public class PagoRegistro extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            // Extraer valores
+            // Extraemos valores
             String correo = jTextField1.getText().trim();
             String codigoEvento = jTextField2.getText().trim();
             String metodoSeleccionado = (String) jComboBox1.getSelectedItem();
             String montoStr = jTextField3.getText().trim();
 
-            // Validar campos vacíos
+            // Validamos campos vacíos
             if (correo.isEmpty() || codigoEvento.isEmpty() || metodoSeleccionado == null || montoStr.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.");
                 return;
             }
 
-            // Validar correo con regex
+            // Validamos correo con regex
             if (!correo.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
                 JOptionPane.showMessageDialog(this, "Ingrese un correo electrónico válido.");
                 jTextField1.setText("");
                 return;
             }
 
-            // Validar tipo de pago (Enum)
+            // Validamos tipo de pago (Enum)
             TipoPago tipoPago;
             try {
                 tipoPago = TipoPago.valueOf(metodoSeleccionado.toUpperCase());
@@ -178,7 +178,7 @@ public class PagoRegistro extends javax.swing.JPanel {
                 return;
             }
 
-            // Validar monto
+            // Validamos monto
             double monto;
             try {
                 monto = Double.parseDouble(montoStr);
@@ -193,7 +193,7 @@ public class PagoRegistro extends javax.swing.JPanel {
                 return;
             }
 
-            // Crear objeto pago
+            // Creamos objeto pago
             Pago nuevoPago = new Pago(
                     correo,
                     codigoEvento,
@@ -201,7 +201,7 @@ public class PagoRegistro extends javax.swing.JPanel {
                     monto
             );
 
-            // Insertar en DB
+            // Insertamos en la DB
             InsertarPago insertar = new InsertarPago(ConexionDB.getConnection());
 
             try {

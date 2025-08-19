@@ -115,30 +115,30 @@ public class AsistenciaRegistro extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            // Extraer valores
+            // Extraemos valores
             String correo = jTextField1.getText().trim();
             String codigoActividad = jTextField2.getText().trim();
 
-            // Validar campos vacíos
+            // Validamos campos vacíos
             if (correo.isEmpty() || codigoActividad.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.");
                 return;
             }
 
-            // Validar correo con regex
+            // Validamos correo con regex
             if (!correo.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
                 JOptionPane.showMessageDialog(this, "Ingrese un correo electrónico válido.");
                 jTextField1.setText("");
                 return;
             }
 
-            // Crear objeto asistencia
+            // Creamos objeto asistencia
             Asistencia nuevaAsistencia = new Asistencia(
                     correo,
                     codigoActividad
             );
 
-            // Insertar en DB
+            // Insertamos en la DB
             InsertarAsistencia insertar = new InsertarAsistencia(ConexionDB.getConnection());
             try {
                 insertar.ingresarAsistencia(nuevaAsistencia);

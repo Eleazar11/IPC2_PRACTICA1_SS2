@@ -24,28 +24,28 @@ public class InsertarActividad {
 
     // Método para ingresar una actividad
     public void ingresarActividad(Actividad actividad) throws Exception {
-        // 1. Validar que el evento exista
+        // Validamos que el evento exista
         int cupoEvento = obtenerCupoEvento(actividad.getCodigoEvento());
         if (cupoEvento < 0) {
             throw new Exception("El evento con código " + actividad.getCodigoEvento() + " no existe.");
         }
 
-        // 2. Validar que el encargado esté inscrito y validado en ese evento
+        // Validamps que el encargado esté inscrito y validado en ese evento
         if (!encargadoValido(actividad.getCorreoEncargado(), actividad.getCodigoEvento())) {
             throw new Exception("El encargado no está inscrito o no tiene inscripción validada en este evento.");
         }
 
-        // 3. Validar que el cupo de la actividad no supere el cupo del evento
+        // Validamos que el cupo de la actividad no supere el cupo del evento
         if (actividad.getCupoMaximo() > cupoEvento) {
             throw new Exception("El cupo de la actividad no puede superar el cupo del evento (" + cupoEvento + ").");
         }
 
-        // 4. Validar que no exista otra actividad en el mismo evento y rango de horas
+        // Validamos que no exista otra actividad en el mismo evento y rango de horas
         if (actividadTraslapada(actividad)) {
             throw new Exception("Ya existe otra actividad en el mismo evento con un horario que se traslapa.");
         }
 
-        // 5. Insertar la actividad
+        // Insertamos ahora si la actividad
         String sql = "INSERT INTO actividad (codigo_actividad, codigo_evento, tipo_actividad, titulo, correo_encargado, hora_inicio, hora_fin, cupo_maximo) "
                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -69,7 +69,7 @@ public class InsertarActividad {
         }
     }
 
-    // Obtener cupo máximo del evento
+    // Obtiene cupo máximo del evento
     private int obtenerCupoEvento(String codigoEvento) {
         String sql = "SELECT cupo_maximo FROM evento WHERE codigo_evento = ?";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -85,7 +85,7 @@ public class InsertarActividad {
         return -1;
     }
 
-    // Validar que el encargado esté inscrito y validado
+    // Validamos que el encargado esté inscrito y validado
     private boolean encargadoValido(String correo, String codigoEvento) {
         String sql = "SELECT COUNT(*) FROM inscripcion WHERE correo_participante = ? AND codigo_evento = ? AND inscripcion_validada = 1";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -102,7 +102,7 @@ public class InsertarActividad {
         return false;
     }
 
-    // Validar solapamiento de horarios en el mismo evento
+    // Validamos tranlapes de horarios en el mismo evento
     private boolean actividadTraslapada(Actividad actividad) {
         String sql = "SELECT COUNT(*) FROM actividad " +
                      "WHERE codigo_evento = ? " +

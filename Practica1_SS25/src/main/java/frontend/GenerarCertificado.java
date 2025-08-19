@@ -143,7 +143,7 @@ public class GenerarCertificado extends javax.swing.JPanel {
                 return;
             }
 
-            // Obtener nombre completo del participante desde la base de datos
+            // Obtenemos nombre completo del participante desde la base de datos
             String nombreParticipante = "";
             String sql = "SELECT nombre_completo FROM participante WHERE correo = ?";
             try (PreparedStatement pstmt = ConexionDB.getConnection().prepareStatement(sql)) {
@@ -157,7 +157,7 @@ public class GenerarCertificado extends javax.swing.JPanel {
                 }
             }
 
-            // Crear objeto Certificado con la fecha de hoy
+            // Creaamos objeto Certificado con la fecha de hoy
             Certificado certificado = new Certificado(
                     correo,
                     nombreParticipante,
@@ -165,7 +165,7 @@ public class GenerarCertificado extends javax.swing.JPanel {
                     java.time.LocalDate.now()
             );
 
-            // Generar certificado
+            // Generamos certificado
             GeneradorCertificado generador = new GeneradorCertificado(ConexionDB.getConnection());
             try {
                 generador.generar(certificado);

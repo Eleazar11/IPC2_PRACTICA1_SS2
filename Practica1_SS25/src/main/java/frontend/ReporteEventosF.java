@@ -130,23 +130,23 @@ public class ReporteEventosF extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            // Obtener código del evento desde jTextField1 y tipo de evento desde jComboBox3
+            // Obtenemos código del evento desde jTextField1 y tipo de evento desde jComboBox3
             String codigoEvento = jTextField1.getText().trim();
             String tipoEvento = jComboBox3.getSelectedItem().toString();
 
-            // Validar que no estén vacíos
+            // Validamos que no estén vacíos
             if (codigoEvento.isEmpty() || tipoEvento.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Debe ingresar el código y seleccionar el tipo de evento.");
                 return;
             }
 
-            // Crear el generador de reporte y generar el HTML
+            // Creamoa el generador de reporte y generar el HTML
             ReporteEventos reporte = new ReporteEventos(ConexionDB.getConnection());
             reporte.generarReporte(codigoEvento, tipoEvento);
 
             JOptionPane.showMessageDialog(this, "Reporte generado correctamente en reportes/eventos.");
 
-            // Limpiar campo de texto
+            // Limpiamos campo de texto
             jTextField1.setText("");
 
         } catch (Exception e) {
@@ -163,8 +163,6 @@ public class ReporteEventosF extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;

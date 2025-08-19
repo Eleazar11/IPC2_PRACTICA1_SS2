@@ -21,7 +21,6 @@ public class InsertarParticipante {
         this.connection = connection;
     }
 
-    // Método para insertar un participante en la base de datos
     public void ingresarParticipante(Participante participante) {
         String sql = "INSERT INTO participante (correo, nombre_completo, tipo_participante, institucion, participante_validado) "
                    + "VALUES (?, ?, ?, ?, ?)";
@@ -43,7 +42,7 @@ public class InsertarParticipante {
         }
     }
 
-    // Validación de correo único
+    // Validamos que correo sea único
     public boolean existeCorreo(String correo) {
         String sql = "SELECT COUNT(*) FROM participante WHERE correo = ?";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {

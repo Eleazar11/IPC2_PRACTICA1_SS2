@@ -200,7 +200,7 @@ public class ActividadRegistro extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         try {
-            // Extraer valores
+            // Extraemos valores
             String codigoActividad = jTextField1.getText().trim();
             String codigoEvento = jTextField2.getText().trim();
             String titulo = jTextArea1.getText().trim();
@@ -210,7 +210,7 @@ public class ActividadRegistro extends javax.swing.JPanel {
             LocalTime horaFin = timePicker2.getTime(); // asumiendo que devuelve LocalTime
             String cupoStr = jTextField4.getText().trim();
 
-            // Validar campos vacíos
+            // Validamos campos vacíos
             if (codigoActividad.isEmpty() || codigoEvento.isEmpty() || titulo.isEmpty()
                     || correoEncargado.isEmpty() || tipoSeleccionado == null || horaInicio == null
                     || horaFin == null || cupoStr.isEmpty()) {
@@ -218,20 +218,20 @@ public class ActividadRegistro extends javax.swing.JPanel {
                 return;
             }
 
-            // Validar longitud de título
+            // Validamos longitud de título
             if (titulo.length() > 200) {
                 JOptionPane.showMessageDialog(this, "El título no puede superar los 200 caracteres.");
                 return;
             }
 
-            // Validar correo con regex
+            // Validamos correo con regex
             if (!correoEncargado.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
                 JOptionPane.showMessageDialog(this, "Ingrese un correo electrónico válido.");
                 jTextField3.setText("");
                 return;
             }
 
-            // Validar tipo de actividad (Enum)
+            // Validamos tipo de actividad (Enum)
             TipoActividad tipoActividad;
             try {
                 tipoActividad = TipoActividad.valueOf(tipoSeleccionado.toUpperCase());
@@ -240,7 +240,7 @@ public class ActividadRegistro extends javax.swing.JPanel {
                 return;
             }
 
-            // Validar horas
+            // Validamos horas
             if (horaFin.isBefore(horaInicio) || horaFin.equals(horaInicio)) {
                 JOptionPane.showMessageDialog(this, "La hora de fin debe ser mayor que la hora de inicio.");
                 return;
@@ -252,7 +252,7 @@ public class ActividadRegistro extends javax.swing.JPanel {
                 return;
             }
 
-            // Validar cupo
+            // Validamos cupo
             int cupoMaximo;
             try {
                 cupoMaximo = Integer.parseInt(cupoStr);
@@ -267,7 +267,7 @@ public class ActividadRegistro extends javax.swing.JPanel {
                 return;
             }
 
-            // Crear objeto actividad
+            // Crearmos un objeto actividad
             Actividad nuevaActividad = new Actividad(
                     codigoActividad,
                     codigoEvento,
@@ -285,7 +285,7 @@ public class ActividadRegistro extends javax.swing.JPanel {
                 insertar.ingresarActividad(nuevaActividad);
                 JOptionPane.showMessageDialog(this, "Actividad registrada exitosamente.");
 
-                // Limpiar campos
+                // Limpiamos campos
                 jTextField1.setText("");
                 jTextField2.setText("");
                 jTextArea1.setText("");

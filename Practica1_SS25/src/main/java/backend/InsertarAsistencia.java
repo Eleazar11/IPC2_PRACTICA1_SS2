@@ -22,27 +22,27 @@ public class InsertarAsistencia {
     }
 
     public void ingresarAsistencia(Asistencia asistencia) throws Exception {
-        // Validar que el correo esté inscrito en el evento correspondiente a la actividad
+        // Validamos que el correo esté inscrito en el evento correspondiente a la actividad
         if (!existeInscripcion(asistencia.getCorreoParticipante(), asistencia.getCodigoActividad())) {
             throw new Exception("El participante no está inscrito en el evento correspondiente a esta actividad.");
         }
 
-        // Validar que la inscripción esté validada
+        // Validamos que la inscripción esté validada
         if (!inscripcionValidada(asistencia.getCorreoParticipante(), asistencia.getCodigoActividad())) {
             throw new Exception("La inscripción del participante no está validada.");
         }
 
-        // Validar que no exista asistencia duplicada
+        // Validamos que no exista asistencia duplicada
         if (asistenciaRegistrada(asistencia.getCorreoParticipante(), asistencia.getCodigoActividad())) {
             throw new Exception("El participante ya tiene asistencia registrada para esta actividad.");
         }
 
-        // Validar cupo disponible
+        // Validamos cupo disponible
         if (!hayCupoDisponible(asistencia.getCodigoActividad())) {
             throw new Exception("No hay cupo disponible en esta actividad.");
         }
 
-        // Insertar la asistencia
+        // Validamos la asistencia
         String sql = "INSERT INTO asistencia (codigo_actividad, correo_participante) VALUES (?, ?)";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, asistencia.getCodigoActividad());
@@ -57,7 +57,7 @@ public class InsertarAsistencia {
         }
     }
 
-    // Verifica si el participante está inscrito en el evento correspondiente a la actividad
+    // Verificmos si el participante está inscrito en el evento correspondiente a la actividad
     private boolean existeInscripcion(String correo, String codigoActividad) {
         String sql = "SELECT COUNT(*) FROM inscripcion i "
                 + "JOIN actividad a ON i.codigo_evento = a.codigo_evento "
@@ -75,7 +75,7 @@ public class InsertarAsistencia {
         return false;
     }
 
-    // Nuevo método: verifica si la inscripción del participante está validada
+    // Validamos si la inscripción del participante está validada
     private boolean inscripcionValidada(String correo, String codigoActividad) {
         String sql = "SELECT COUNT(*) FROM inscripcion i "
                 + "JOIN actividad a ON i.codigo_evento = a.codigo_evento "
@@ -95,7 +95,7 @@ public class InsertarAsistencia {
         return false;
     }
 
-    // Verifica si el participante ya tiene asistencia registrada en la actividad
+    // Validamos si el participante ya tiene asistencia registrada en la actividad
     private boolean asistenciaRegistrada(String correo, String codigoActividad) {
         String sql = "SELECT COUNT(*) FROM asistencia "
                 + "WHERE correo_participante = ? AND codigo_actividad = ?";
@@ -112,7 +112,7 @@ public class InsertarAsistencia {
         return false;
     }
 
-    // Verifica si la actividad aún tiene cupo disponible
+    // Validamos si la actividad aún tiene cupo disponible
     private boolean hayCupoDisponible(String codigoActividad) {
         String sql = "SELECT a.cupo_maximo, COUNT(asist.id_asistencia) AS total_asistencias "
                 + "FROM actividad a "

@@ -21,7 +21,6 @@ public class InsertarInscripcion {
         this.connection = connection;
     }
 
-    // Método para insertar una inscripción en la base de datos
     public void ingresarInscripcion(Inscripcion inscripcion) {
         String sql = "INSERT INTO inscripcion (correo_participante, codigo_evento, tipo_inscripcion, inscripcion_validada) "
                    + "VALUES (?, ?, ?, ?)";
@@ -42,7 +41,7 @@ public class InsertarInscripcion {
         }
     }
 
-    // Validación existe una inscripción de este participante a este evento
+    // Validamos si existe una inscripción de este participante a este evento
     public boolean existeInscripcion(String correoParticipante, String codigoEvento) {
         String sql = "SELECT COUNT(*) FROM inscripcion WHERE correo_participante = ? AND codigo_evento = ?";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {

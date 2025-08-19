@@ -29,7 +29,7 @@ public class InsertarEvento {
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, evento.getCodigoEvento());
 
-            // convertir LocalDate a java.sql.Date
+            // convertimos el LocalDate a java.sql.Date
             pstmt.setDate(2, java.sql.Date.valueOf(evento.getFechaEvento()));
 
             pstmt.setString(3, evento.getTipoEvento().name()); // enum guardado como texto

@@ -140,25 +140,25 @@ public class InscripcionRegistro extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            // Extraer valores
+            // Extraemos valores
             String correo = jTextField1.getText().trim();
             String codigoEvento = jTextField2.getText().trim();
             String tipoSeleccionado = (String) jComboBox1.getSelectedItem();
 
-            // Validar campos vacíos
+            // Validamos campos vacíos
             if (correo.isEmpty() || codigoEvento.isEmpty() || tipoSeleccionado == null) {
                 JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.");
                 return;
             }
 
-            // Validar correo con regex simple
+            // Validamos correo con regex simple
             if (!correo.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
                 JOptionPane.showMessageDialog(this, "Ingrese un correo electrónico válido.");
                 jTextField1.setText("");
                 return;
             }
 
-            // Validar tipo de inscripción (Enum)
+            // Validamos tipo de inscripción (Enum)
             TipoInscripcion tipoInscripcion;
             try {
                 tipoInscripcion = TipoInscripcion.valueOf(tipoSeleccionado.toUpperCase());
@@ -167,28 +167,28 @@ public class InscripcionRegistro extends javax.swing.JPanel {
                 return;
             }
 
-            // Conexión e inserción
+            // Nos conectamos y hacemos la insercion
             InsertarInscripcion insertar = new InsertarInscripcion(ConexionDB.getConnection());
 
-            // Validar que no exista ya esa inscripción
+            // Validamos que no exista ya esa inscripción
             if (insertar.existeInscripcion(correo, codigoEvento)) {
                 JOptionPane.showMessageDialog(this, "Este participante ya está inscrito en este evento.");
                 return;
             }
 
-            // Crear objeto inscripción
+            // Creamos objeto inscripción
             Inscripcion nuevaInscripcion = new Inscripcion(
                     correo,
                     codigoEvento,
                     tipoInscripcion
             );
 
-            // Guardar en la base de datos
+            // Guardamos en la base de datos
             insertar.ingresarInscripcion(nuevaInscripcion);
 
             JOptionPane.showMessageDialog(this, "Inscripción registrada exitosamente.");
 
-            // Limpiar campos
+            // Limpiamos campos
             jTextField1.setText("");
             jTextField2.setText("");
             jComboBox1.setSelectedIndex(0);

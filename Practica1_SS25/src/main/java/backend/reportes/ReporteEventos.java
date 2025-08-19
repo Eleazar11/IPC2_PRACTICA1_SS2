@@ -49,7 +49,6 @@ public class ReporteEventos {
             html.append("<html><body style='font-family:Arial, sans-serif;'>");
             html.append("<h2>REPORTE DE EVENTO</h2>");
 
-// Datos generales del evento (lado izquierdo)
             html.append("<table border='0' cellspacing='0' cellpadding='5'>");
             html.append("<tr><td><b>CÓDIGO DE EVENTO:</b></td><td></td></tr>");
             html.append("<tr><td><b>FECHA DE EVENTO:</b></td><td></td></tr>");
@@ -59,7 +58,6 @@ public class ReporteEventos {
             html.append("<tr><td><b>CUPO MÁXIMO:</b></td><td></td></tr>");
             html.append("</table><br>");
 
-// Tabla de participantes
             html.append("<table border='1' cellspacing='0' cellpadding='5'>");
             html.append("<tr>")
                     .append("<th>CORREO DEL PARTICIPANTE</th>")

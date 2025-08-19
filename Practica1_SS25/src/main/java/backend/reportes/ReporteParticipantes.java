@@ -24,16 +24,16 @@ public class ReporteParticipantes {
     }
 
     public void generar(String codigoEvento) throws Exception {
-        // Crear carpeta reportes/participantes si no existe
+        // Creamos la carpeta reportes/participantes si no existe
         File carpeta = new File("reportes/participantes");
         if (!carpeta.exists()) {
             carpeta.mkdirs();
         }
 
-        // Nombre del archivo HTML
+        // Definimos del archivo HTML
         String nombreArchivo = "reportes/participantes/reporte_" + codigoEvento + ".html";
 
-        // Consulta a la BD
+        // Consultamos a la DB
         String sql = "SELECT correo, tipo_participante, nombre_completo, institucion, participante_validado " +
                      "FROM participante " +
                      "WHERE correo IN (SELECT correo_participante FROM asistencia a " +

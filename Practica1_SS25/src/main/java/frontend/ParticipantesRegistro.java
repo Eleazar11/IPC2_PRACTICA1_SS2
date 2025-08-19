@@ -161,33 +161,33 @@ public class ParticipantesRegistro extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            // Extraer valores
+            // Extraemos valores
             String nombre = jTextField1.getText().trim();
             String correo = jTextField2.getText().trim();
             String institucion = jTextArea1.getText().trim();
             String tipoSeleccionado = (String) jComboBox1.getSelectedItem();
 
-            // Validar campos vacíos
+            // Validamos campos vacíos
             if (nombre.isEmpty() || correo.isEmpty() || institucion.isEmpty() || tipoSeleccionado == null) {
                 JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.");
                 return;
             }
 
-            // Validar longitud de institución
+            // Validamos longitud de institución
             if (institucion.length() > 150) {
                 JOptionPane.showMessageDialog(this, "La institución no puede superar los 150 caracteres.");
                 jTextArea1.setText("");
                 return;
             }
 
-            // Validar correo (formato simple con regex)
+            // Validamos correo (formato simple con regex)
             if (!correo.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
                 JOptionPane.showMessageDialog(this, "Ingrese un correo electrónico válido.");
                 jTextField2.setText("");
                 return;
             }
 
-            // Validar tipo de participante (Enum)
+            // Validamos tipo de participante (Enum)
             TipoParticipante tipoParticipante;
             try {
                 tipoParticipante = TipoParticipante.valueOf(tipoSeleccionado.toUpperCase());
@@ -196,17 +196,17 @@ public class ParticipantesRegistro extends javax.swing.JPanel {
                 return;
             }
 
-            // Conexión e inserción
+            // Conextamos 
             InsertarParticipante insertar = new InsertarParticipante(ConexionDB.getConnection());
 
-            // Validar correo único
+            // Validamos correo único
             if (insertar.existeCorreo(correo)) {
                 JOptionPane.showMessageDialog(this, "El correo ya está registrado. Ingrese otro diferente.");
                 jTextField2.setText("");
                 return;
             }
 
-            // Crear objeto participante
+            // Creamos objeto participante
             Participante nuevoParticipante = new Participante(
                 nombre,
                 correo,
@@ -214,7 +214,7 @@ public class ParticipantesRegistro extends javax.swing.JPanel {
                 institucion
             );
 
-            // Guardar en la base de datos
+            // Guardamos en la base de datos
             insertar.ingresarParticipante(nuevoParticipante);
 
             JOptionPane.showMessageDialog(this, "Participante registrado exitosamente.");

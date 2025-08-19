@@ -112,22 +112,22 @@ public class ReporteActividadesF extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            // Obtener código del evento desde jTextField1
+            // Obtenemos código del evento desde jTextField1
             String codigoEvento = jTextField1.getText().trim();
 
-            // Validar que no esté vacío
+            // Validamos que no esté vacío
             if (codigoEvento.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Debe ingresar el código del evento.");
                 return;
             }
 
-            // Crear el generador de reporte y generar el HTML
+            // Creaamos el generador de reporte y generar el HTML
             ReporteActividades reporte = new ReporteActividades(ConexionDB.getConnection());
             reporte.generar(codigoEvento);
 
             JOptionPane.showMessageDialog(this, "Reporte generado correctamente en reportes/actividades.");
 
-            // Limpiar campo
+            // Limpiamos campo
             jTextField1.setText("");
 
         } catch (Exception e) {

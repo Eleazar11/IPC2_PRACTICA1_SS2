@@ -27,21 +27,21 @@ public class GeneradorCertificado {
 
     public void generar(Certificado certificado) throws Exception {
 
-        // Validar asistencia
+        // Validamos la asistencia
         if (!tieneAsistencia(certificado.getCorreoParticipante(), certificado.getCodigoEvento())) {
             throw new Exception("El participante no ha asistido a ninguna actividad válida del evento.");
         }
 
-        // Crear carpeta "reportes/certificados" si no existe
+        // Creamos la carpeta "reportes/certificados" si no existe
         File carpeta = new File("reportes/certificados");
         if (!carpeta.exists()) {
             carpeta.mkdirs();
         }
 
-        // Formatear la fecha actual
+        // Formateamos la fecha actual
         String fechaFormateada = certificado.getFechaEmision().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
-        // Generar archivo HTML
+        // Generamos archivo HTML
         String nombreArchivo = "reportes/certificados/certificado_" + certificado.getCorreoParticipante() + "_"
                 + certificado.getCodigoEvento() + ".html";
 
@@ -59,7 +59,7 @@ public class GeneradorCertificado {
             pw.println("</body></html>");
         }
 
-        // Guardar en la base de datos
+        // Guardamos en la base de datos
         String sqlInsert = "INSERT INTO certificado (correo_participante, codigo_evento, fecha_emision) VALUES (?, ?, ?)";
         try (PreparedStatement pstmt = connection.prepareStatement(sqlInsert)) {
             pstmt.setString(1, certificado.getCorreoParticipante());
