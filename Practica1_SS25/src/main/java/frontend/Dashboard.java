@@ -83,6 +83,11 @@ public class Dashboard extends javax.swing.JFrame {
         });
 
         jButton5.setText("ACTIVIDADES");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("ASISTENCIA");
 
@@ -195,6 +200,16 @@ public class Dashboard extends javax.swing.JFrame {
         content.revalidate();
         content.repaint();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        ActividadRegistro ActividadRegistro = new ActividadRegistro();
+        ActividadRegistro.setSize(700, 460);
+        ActividadRegistro.setLocation(0,0);
+        content.removeAll();
+        content.add(ActividadRegistro, BorderLayout.CENTER);
+        content.revalidate();
+        content.repaint();
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
