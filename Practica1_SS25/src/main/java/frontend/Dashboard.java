@@ -118,6 +118,11 @@ public class Dashboard extends javax.swing.JFrame {
         });
 
         jButton10.setText("R.EVENTOS");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout contentLayout = new javax.swing.GroupLayout(content);
         content.setLayout(contentLayout);
@@ -270,6 +275,16 @@ public class Dashboard extends javax.swing.JFrame {
         content.revalidate();
         content.repaint();
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        ReporteEventosF ReporteActividadesF = new ReporteEventosF();
+        ReporteActividadesF.setSize(700, 460);
+        ReporteActividadesF.setLocation(0,0);
+        content.removeAll();
+        content.add(ReporteActividadesF, BorderLayout.CENTER);
+        content.revalidate();
+        content.repaint();
+    }//GEN-LAST:event_jButton10ActionPerformed
 
     /**
      * @param args the command line arguments
